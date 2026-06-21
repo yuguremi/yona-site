@@ -1,12 +1,9 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { ContactCTA } from "@/components/home/ContactCTA";
 import { DiscographyList } from "@/components/works/DiscographyList";
-import { WorkCard } from "@/components/works/WorkCard";
-import { WorkGrid } from "@/components/works/WorkGrid";
-import { WorksExplorer } from "@/components/works/WorksExplorer";
+import { ProjectCard } from "@/components/works/ProjectCard";
 import { getSortedWorks } from "@/data/works";
 import { discography, totalSongCount } from "@/data/discography";
 import { createMetadata } from "@/lib/metadata";
@@ -20,6 +17,7 @@ export const metadata: Metadata = createMetadata({
 
 export default function WorksPage() {
   const works = getSortedWorks();
+  const [featured, ...rest] = works;
 
   return (
     <>
@@ -29,30 +27,27 @@ export default function WorksPage() {
           <h1 className="text-page-title mt-6 font-display font-semibold">Works</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
             領域を横断して設計したアーティストプロデュースのプロジェクトと、
-            作詞・作曲・編曲として参加した楽曲の記録。
+            作詞・作曲・編曲による楽曲提供の記録。
           </p>
         </header>
 
-        {/* Projects */}
-        <section className="mt-14 md:mt-16">
+        {/* Projects — cinematic featured layout */}
+        <section className="mt-12 md:mt-16">
           <h2 className="eyebrow mb-6">Projects</h2>
-          {/* useSearchParams in WorksExplorer requires a Suspense boundary.
-              The fallback renders every work so crawlers still see the list. */}
-          <Suspense
-            fallback={
-              <WorkGrid>
-                {works.map((work, index) => (
-                  <WorkCard key={work.slug} work={work} priority={index < 3} />
+          <div className="flex flex-col gap-5 md:gap-6">
+            {featured ? <ProjectCard work={featured} featured priority /> : null}
+            {rest.length > 0 ? (
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
+                {rest.map((work, index) => (
+                  <ProjectCard key={work.slug} work={work} priority={index === 0} />
                 ))}
-              </WorkGrid>
-            }
-          >
-            <WorksExplorer works={works} />
-          </Suspense>
+              </div>
+            ) : null}
+          </div>
         </section>
       </Container>
 
-      {/* Discography */}
+      {/* Songwriting credits */}
       <Container className="mt-24 md:mt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="Songwriting" title="楽曲提供" />
