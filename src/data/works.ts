@@ -83,7 +83,7 @@ export const works: Work[] = [
       { label: "Music & Lyrics", value: "yona" },
       { label: "Creative Direction", value: "yona" },
     ],
-    thumbnail: "",
+    thumbnail: "/images/works/yuguremi/cover.png",
     featured: true,
   },
   {
@@ -95,7 +95,7 @@ export const works: Work[] = [
     client: "TRACE SILVER × AOHARIUM TOKYO",
     description:
       "雨、記憶、再生を軸にしたアーティストプロジェクト。TRACE SILVER × AOHARIUM TOKYOによる共同プロデュース。",
-    thumbnail: "",
+    thumbnail: "/images/works/retrorain/cover.png",
     featured: true,
   },
   {
@@ -106,7 +106,7 @@ export const works: Work[] = [
     role: ["Produce", "Concept Development", "Business Design"],
     description:
       "都市伝説とシンセウェーブを組み合わせた実験型アイドルプロジェクト。",
-    thumbnail: "",
+    thumbnail: "/images/works/avaclub/cover.png",
   },
 ];
 

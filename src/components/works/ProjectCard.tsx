@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Media } from "@/components/common/Media";
 import { categoryLabels, type Work } from "@/data/works";
-import { cn } from "@/lib/utils";
+import { cn, hasMedia } from "@/lib/utils";
 
 /**
  * Cinematic, image-forward project card for the WORKS page.
@@ -18,6 +18,10 @@ export function ProjectCard({
   priority?: boolean;
 }) {
   const categoryText = work.category.map((c) => categoryLabels[c]).join(" / ");
+  // When a real key visual is supplied (which already carries the group's
+  // logo), keep the title for a11y/SEO but hide it visually to avoid the name
+  // appearing twice.
+  const hasCover = hasMedia(work.thumbnail);
 
   return (
     <Link
@@ -60,12 +64,16 @@ export function ProjectCard({
         <h3
           className={cn(
             "font-display font-semibold tracking-tight",
-            featured ? "text-4xl md:text-6xl" : "text-2xl md:text-4xl",
+            hasCover
+              ? "sr-only"
+              : featured
+                ? "text-4xl md:text-6xl"
+                : "text-2xl md:text-4xl",
           )}
         >
           {work.title}
         </h3>
-        {work.subtitle ? (
+        {work.subtitle && !hasCover ? (
           <p className="text-sm text-foreground/70">{work.subtitle}</p>
         ) : null}
         <span className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/85">
