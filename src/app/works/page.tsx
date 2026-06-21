@@ -1,17 +1,20 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
+import { SectionHeading } from "@/components/common/SectionHeading";
 import { ContactCTA } from "@/components/home/ContactCTA";
+import { DiscographyList } from "@/components/works/DiscographyList";
 import { WorkCard } from "@/components/works/WorkCard";
 import { WorkGrid } from "@/components/works/WorkGrid";
 import { WorksExplorer } from "@/components/works/WorksExplorer";
 import { getSortedWorks } from "@/data/works";
+import { discography, totalSongCount } from "@/data/discography";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Works",
   description:
-    "yonaが手がけたアーティストプロデュース、楽曲、ライブ／イベント、クリエイティブディレクションの実績一覧。",
+    "yonaが手がけたアーティストプロデュースのプロジェクトと、作詞・作曲・編曲として参加した楽曲（ディスコグラフィー）。",
   path: "/works",
 });
 
@@ -25,12 +28,14 @@ export default function WorksPage() {
           <span className="eyebrow">Portfolio</span>
           <h1 className="text-page-title mt-6 font-display font-semibold">Works</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-            アーティストプロデュース、楽曲、クリエイティブディレクションを
-            横断して設計したプロジェクトの記録。
+            領域を横断して設計したアーティストプロデュースのプロジェクトと、
+            作詞・作曲・編曲として参加した楽曲の記録。
           </p>
         </header>
 
-        <div className="mt-14 md:mt-16">
+        {/* Projects */}
+        <section className="mt-14 md:mt-16">
+          <h2 className="eyebrow mb-6">Projects</h2>
           {/* useSearchParams in WorksExplorer requires a Suspense boundary.
               The fallback renders every work so crawlers still see the list. */}
           <Suspense
@@ -44,6 +49,19 @@ export default function WorksPage() {
           >
             <WorksExplorer works={works} />
           </Suspense>
+        </section>
+      </Container>
+
+      {/* Discography */}
+      <Container className="mt-24 md:mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow="Songwriting" title="Discography" />
+          <span className="font-mono text-xs text-muted">
+            {discography.length} artists / {totalSongCount()} songs
+          </span>
+        </div>
+        <div className="mt-10 md:mt-12">
+          <DiscographyList />
         </div>
       </Container>
 

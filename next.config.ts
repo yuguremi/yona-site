@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     // Serve modern formats when source images are supplied (SPEC §6.5).
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    // Discography was merged into the WORKS page.
+    return [{ source: "/discography", destination: "/works", permanent: true }];
+  },
 };
 
 export default nextConfig;
