@@ -3,6 +3,8 @@
  * (SPEC §16 "楽曲クレジット" の拡張). Edit this file to add songs/artists.
  *
  * `workSlug` links an artist to its WORKS detail page when one exists.
+ * `image` is the artist key visual shown in the WORKS 楽曲提供 list; when
+ * omitted a typographic placeholder is rendered.
  */
 
 export type CreditRole = "lyrics-music-arr" | "music-arr" | "arr";
@@ -24,6 +26,8 @@ export type DiscographyArtist = {
   name: string;
   /** Optional link to a /works/<slug> detail page */
   workSlug?: string;
+  /** Artist key visual path; falls back to a placeholder when omitted */
+  image?: string;
   groups: DiscographyGroup[];
 };
 
@@ -31,6 +35,7 @@ export const discography: DiscographyArtist[] = [
   {
     name: "YUGUREMI",
     workSlug: "yuguremi",
+    image: "/images/works/yuguremi/cover.png",
     groups: [
       { role: "music-arr", songs: ["CROSS"] },
       {
@@ -57,6 +62,7 @@ export const discography: DiscographyArtist[] = [
   {
     name: "RETRORAIN",
     workSlug: "retrorain",
+    image: "/images/works/retrorain/cover.png",
     groups: [
       { role: "music-arr", songs: ["ノボリビ"] },
       {
@@ -85,6 +91,7 @@ export const discography: DiscographyArtist[] = [
   {
     name: "AVACLUB",
     workSlug: "avaclub",
+    image: "/images/works/avaclub/cover.png",
     groups: [
       {
         role: "music-arr",
@@ -109,6 +116,7 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "アンスリューム",
+    image: "/images/discography/anthurium.jpg",
     groups: [
       { role: "arr", songs: ["泥棒猫", "はいどあんどしーく！"] },
       {
@@ -119,6 +127,7 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "BOY MEETS HARU",
+    image: "/images/discography/boymeetsharu.png",
     groups: [
       { role: "music-arr", songs: ["BOY MEETS HARU", "未完成「ANTHEM」", "溺愛drug"] },
       {
@@ -173,6 +182,7 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "メガメガミ",
+    image: "/images/discography/megamegami.jpg",
     groups: [
       {
         role: "music-arr",
@@ -189,6 +199,7 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "われらがプワプワプーワプワ",
+    image: "/images/discography/warepuwa.png",
     groups: [
       {
         role: "music-arr",
@@ -204,6 +215,7 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "MAJIBANCH",
+    image: "/images/discography/majibanch.png",
     groups: [
       {
         role: "music-arr",

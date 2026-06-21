@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Media } from "@/components/common/Media";
 import { RevealText } from "@/components/common/RevealText";
 import {
   artistSongCount,
@@ -17,22 +18,31 @@ export function DiscographyList() {
       {discography.map((artist) => (
         <RevealText key={artist.name}>
           <section className="border-t border-line py-12 md:py-16">
-            <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="font-display text-3xl font-medium tracking-tight md:text-5xl">
-                {artist.workSlug ? (
-                  <Link
-                    href={`/works/${artist.workSlug}`}
-                    className="underline-offset-4 transition-colors hover:text-muted hover:underline"
-                  >
-                    {artist.name}
-                  </Link>
-                ) : (
-                  artist.name
-                )}
-              </h3>
-              <span className="font-mono text-xs text-muted">
-                {artistSongCount(artist)} songs
-              </span>
+            <div className="flex items-center gap-4 md:gap-5">
+              <div className="relative aspect-square w-16 shrink-0 overflow-hidden rounded-sm border border-line sm:w-20 md:w-24">
+                <Media
+                  src={artist.image}
+                  alt={`${artist.name} のアーティスト写真`}
+                  sizes="96px"
+                />
+              </div>
+              <div className="flex flex-1 flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="font-display text-2xl font-medium tracking-tight md:text-4xl">
+                  {artist.workSlug ? (
+                    <Link
+                      href={`/works/${artist.workSlug}`}
+                      className="underline-offset-4 transition-colors hover:text-muted hover:underline"
+                    >
+                      {artist.name}
+                    </Link>
+                  ) : (
+                    artist.name
+                  )}
+                </h3>
+                <span className="font-mono text-xs text-muted">
+                  {artistSongCount(artist)} songs
+                </span>
+              </div>
             </div>
 
             <div className="mt-8 space-y-8">
