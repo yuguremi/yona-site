@@ -14,7 +14,7 @@ import { createMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createMetadata({
   title: "Works",
   description:
-    "yonaが手がけたアーティストプロデュースのプロジェクトと、作詞・作曲・編曲として参加した楽曲（ディスコグラフィー）。",
+    "yonaが手がけたアーティストプロデュースのプロジェクトと、作詞・作曲・編曲による楽曲提供の一覧。",
   path: "/works",
 });
 
@@ -55,7 +55,7 @@ export default function WorksPage() {
       {/* Discography */}
       <Container className="mt-24 md:mt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading eyebrow="Songwriting" title="Discography" />
+          <SectionHeading eyebrow="Songwriting" title="楽曲提供" />
           <span className="font-mono text-xs text-muted">
             {discography.length} artists / {totalSongCount()} songs
           </span>
