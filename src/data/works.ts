@@ -108,45 +108,6 @@ export const works: Work[] = [
       "都市伝説とシンセウェーブを組み合わせた実験型アイドルプロジェクト。",
     thumbnail: "",
   },
-  {
-    slug: "yoizakura-nostalgia",
-    title: "宵桜ノスタルジア",
-    subtitle: "咲桜ゆめ生誕祭",
-    year: "2025",
-    category: ["live-event"],
-    role: [
-      "Event Concept",
-      "Story Design",
-      "Live Direction",
-      "Ticket Planning",
-      "Merchandise Planning",
-      "Promotion",
-    ],
-    description:
-      "一部「記憶 / ノスタルジア」、二部「現在 / 衝動」。二つの公演を通して一つの物語が完成する体験型の生誕イベントとして設計。",
-    concept: "夜に咲いて、朝に消えてしまう感情。",
-    thumbnail: "",
-    featured: true,
-  },
-  {
-    slug: "still-with-you",
-    title: "Still With You",
-    year: "2024",
-    category: ["music"],
-    role: ["Lyrics", "Music", "Produce"],
-    description: "何度終わっても再び巡り合う二人を描いた楽曲。",
-    thumbnail: "",
-  },
-  {
-    slug: "resonance",
-    title: "Re:sonance",
-    year: "2025",
-    category: ["music"],
-    role: ["Lyrics", "Music", "Produce"],
-    description:
-      "正義、戦争、希望、歪んだ理想をテーマに、壊すことでしか守れない世界を描いた楽曲。",
-    thumbnail: "",
-  },
 ];
 
 /** Lookup a single work by slug. */

@@ -17,8 +17,15 @@ export function WorksExplorer({ works }: { works: Work[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  // Only show filters for categories that actually have works (plus ALL).
+  const availableFilters = categoryFilters.filter(
+    (filter) =>
+      filter.value === "all" ||
+      works.some((work) => work.category.includes(filter.value as WorkCategory)),
+  );
+
   const requested = searchParams.get("category");
-  const active = categoryFilters.some((f) => f.value === requested)
+  const active = availableFilters.some((f) => f.value === requested)
     ? (requested as WorkCategory | "all")
     : "all";
 
@@ -45,7 +52,7 @@ export function WorksExplorer({ works }: { works: Work[] }) {
         aria-label="カテゴリで絞り込み"
         className="flex flex-wrap gap-2"
       >
-        {categoryFilters.map((filter) => {
+        {availableFilters.map((filter) => {
           const isActive = filter.value === active;
           return (
             <button

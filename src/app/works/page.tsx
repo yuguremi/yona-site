@@ -25,8 +25,8 @@ export default function WorksPage() {
           <span className="eyebrow">Portfolio</span>
           <h1 className="text-page-title mt-6 font-display font-semibold">Works</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
-            アーティストプロデュース、楽曲、ライブ、クリエイティブディレクション。
-            領域を横断して設計したプロジェクトの記録。
+            アーティストプロデュース、楽曲、クリエイティブディレクションを
+            横断して設計したプロジェクトの記録。
           </p>
         </header>
 
