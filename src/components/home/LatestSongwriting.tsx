@@ -31,7 +31,7 @@ export function LatestSongwriting() {
 
         <RevealText className="mt-12 md:mt-16">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3">
-            {artists.map((artist) => {
+            {artists.map((artist, index) => {
               const roles = artist.groups
                 .map((group) => creditRoleLabelsJa[group.role])
                 .join(" / ");
@@ -41,6 +41,11 @@ export function LatestSongwriting() {
               return (
                 <Link key={artist.name} href={href} className="group block">
                   <div className="relative aspect-square overflow-hidden rounded-sm border border-line">
+                    {index === 0 ? (
+                      <span className="absolute left-2 top-2 z-10 rounded-full bg-accent-warm px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-white">
+                        New
+                      </span>
+                    ) : null}
                     <Media
                       src={artist.image}
                       alt={`${artist.name} のアーティスト写真`}
