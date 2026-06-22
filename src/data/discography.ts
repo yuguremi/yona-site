@@ -62,7 +62,7 @@ export const discography: DiscographyArtist[] = [
   {
     name: "RETRORAIN",
     workSlug: "retrorain",
-    image: "/images/works/retrorain/cover.png",
+    image: "/images/works/retrorain/cover.jpg",
     groups: [
       { role: "music-arr", songs: ["ノボリビ"] },
       {

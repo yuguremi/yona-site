@@ -95,7 +95,7 @@ export const works: Work[] = [
     client: "TRACE SILVER × AOHARIUM TOKYO",
     description:
       "雨、記憶、再生を軸にしたアーティストプロジェクト。TRACE SILVER × AOHARIUM TOKYOによる共同プロデュース。",
-    thumbnail: "/images/works/retrorain/cover.png",
+    thumbnail: "/images/works/retrorain/cover.jpg",
     featured: true,
   },
   {
