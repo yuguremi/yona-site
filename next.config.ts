@@ -6,8 +6,12 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
-    // Discography was merged into the WORKS page.
-    return [{ source: "/discography", destination: "/works", permanent: true }];
+    return [
+      // Discography was merged into the WORKS page.
+      { source: "/discography", destination: "/works", permanent: true },
+      // ABOUT page was removed.
+      { source: "/about", destination: "/", permanent: true },
+    ];
   },
 };
 
