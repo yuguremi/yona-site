@@ -129,17 +129,19 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </ul>
         </nav>
 
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
-          {socialLinks.map((link) => (
-            <ExternalLink
-              key={link.label}
-              href={link.href}
-              className="font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </ExternalLink>
-          ))}
-        </div>
+        {socialLinks.length > 0 ? (
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {socialLinks.map((link) => (
+              <ExternalLink
+                key={link.label}
+                href={link.href}
+                className="font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </ExternalLink>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );

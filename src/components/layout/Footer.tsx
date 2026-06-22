@@ -10,10 +10,15 @@ import { siteConfig } from "@/lib/metadata";
  */
 export function Footer() {
   const year = new Date().getFullYear();
+  const hasSocial = socialLinks.length > 0;
 
   return (
     <footer className="mt-32 border-t border-line">
-      <Container className="grid gap-12 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:py-20">
+      <Container
+        className={`grid gap-12 py-16 md:py-20 ${
+          hasSocial ? "md:grid-cols-[1.5fr_1fr_1fr]" : "md:grid-cols-[1.5fr_1fr]"
+        }`}
+      >
         <div>
           <p className="font-display text-3xl font-semibold tracking-tight">yona</p>
           <p className="eyebrow mt-3">{siteConfig.role}</p>
@@ -38,21 +43,23 @@ export function Footer() {
           </ul>
         </nav>
 
-        <div>
-          <p className="eyebrow mb-4">Social</p>
-          <ul className="flex flex-col gap-2.5">
-            {socialLinks.map((link) => (
-              <li key={link.label}>
-                <ExternalLink
-                  href={link.href}
-                  className="text-sm text-muted transition-colors hover:text-foreground"
-                >
-                  {link.label}
-                </ExternalLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {hasSocial ? (
+          <div>
+            <p className="eyebrow mb-4">Social</p>
+            <ul className="flex flex-col gap-2.5">
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <ExternalLink
+                    href={link.href}
+                    className="text-sm text-muted transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </ExternalLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </Container>
 
       <Container className="flex flex-col gap-2 border-t border-line py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">

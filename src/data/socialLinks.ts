@@ -12,10 +12,6 @@ export type SocialLink = {
   handle?: string;
 };
 
-export const socialLinks: SocialLink[] = [
-  { label: "Instagram", href: "#", handle: "@yona" },
-  { label: "X", href: "#", handle: "@yona" },
-  { label: "YouTube", href: "#", handle: "yona" },
-  { label: "Spotify", href: "#", handle: "yona" },
-  { label: "Email", href: "mailto:contact@yona.example.com", handle: "contact@yona.example.com" },
-];
+// No social links for now. Add entries here (label + real href) and they will
+// automatically reappear in the footer and mobile menu.
+export const socialLinks: SocialLink[] = [];
