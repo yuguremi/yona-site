@@ -115,10 +115,10 @@ export const works: Work[] = [
     title: "にしの愛望",
     subtitle: "「その一歩に、光を」ティザームービー",
     year: "2026",
-    category: ["artist-produce", "music"],
-    role: ["Produce", "BGM Production"],
+    category: ["music"],
+    role: ["BGM Production"],
     description:
-      "にしの愛望のプロデュース、およびティザームービー「その一歩に、光を」のBGM制作。",
+      "にしの愛望 ティザームービー「その一歩に、光を」のBGM制作。",
     thumbnail: "",
   },
 ];
