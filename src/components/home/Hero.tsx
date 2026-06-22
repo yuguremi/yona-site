@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { Container } from "@/components/common/Container";
 import { CtaLink } from "@/components/common/CtaLink";
@@ -32,11 +33,18 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
-      {/* Background — teal + crimson glow echoing the profile artwork */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c1413] via-background to-background" />
-        <div className="absolute left-[22%] top-1/3 h-[48vmax] w-[48vmax] -translate-x-1/2 rounded-full bg-accent/12 blur-[150px]" />
-        <div className="absolute right-[6%] top-1/2 h-[34vmax] w-[34vmax] rounded-full bg-accent-warm/10 blur-[150px]" />
+      {/* Background — generated atmospheric key art + dark scrim for legibility */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+        <Image
+          src="/images/hero/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/65 to-background/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/35 to-transparent" />
       </div>
 
       {/* Recording marks */}

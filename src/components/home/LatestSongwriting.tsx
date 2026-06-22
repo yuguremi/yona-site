@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/common/Container";
 import { CtaLink } from "@/components/common/CtaLink";
@@ -20,7 +21,16 @@ export function LatestSongwriting() {
   if (artists.length === 0) return null;
 
   return (
-    <section className="border-t border-line py-24 md:py-32">
+    <section className="relative overflow-hidden border-t border-line py-24 md:py-32">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src="/images/textures/particles.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-[0.18]"
+        />
+      </div>
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="Latest" title="最新の楽曲提供" />
