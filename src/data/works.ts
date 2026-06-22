@@ -110,17 +110,6 @@ export const works: Work[] = [
     concept: "噂話は今日も僕らを踊らせる。",
     thumbnail: "/images/works/avaclub/cover.png",
   },
-  {
-    slug: "nishino-aimi",
-    title: "にしの愛望",
-    subtitle: "「その一歩に、光を」ティザームービー",
-    year: "2026",
-    category: ["music"],
-    role: ["BGM Production"],
-    description:
-      "にしの愛望 ティザームービー「その一歩に、光を」のBGM制作。",
-    thumbnail: "",
-  },
 ];
 
 /** Lookup a single work by slug. */

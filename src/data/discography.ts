@@ -7,18 +7,20 @@
  * omitted a typographic placeholder is rendered.
  */
 
-export type CreditRole = "lyrics-music-arr" | "music-arr" | "arr";
+export type CreditRole = "lyrics-music-arr" | "music-arr" | "arr" | "bgm";
 
 export const creditRoleLabels: Record<CreditRole, string> = {
   "lyrics-music-arr": "Lyrics / Music / Arrangement",
   "music-arr": "Music / Arrangement",
   arr: "Arrangement",
+  bgm: "BGM Production",
 };
 
 export const creditRoleLabelsJa: Record<CreditRole, string> = {
   "lyrics-music-arr": "作詞・作曲・編曲",
   "music-arr": "作曲・編曲",
   arr: "編曲",
+  bgm: "BGM制作",
 };
 
 export type DiscographyGroup = { role: CreditRole; songs: string[] };
@@ -221,6 +223,12 @@ export const discography: DiscographyArtist[] = [
         role: "music-arr",
         songs: ["音楽を止めろ", "才子ちゃんの日常", "NEVERLAND", "生き残れよ、少年少女", "CHEATMANIA"],
       },
+    ],
+  },
+  {
+    name: "にしの愛望",
+    groups: [
+      { role: "bgm", songs: ["「その一歩に、光を」ティザームービー"] },
     ],
   },
   {
