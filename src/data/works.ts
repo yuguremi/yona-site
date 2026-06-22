@@ -102,8 +102,8 @@ export const works: Work[] = [
     slug: "avaclub",
     title: "AVACLUB",
     year: "2024",
-    category: ["artist-produce", "creative-direction"],
-    role: ["Produce", "Concept Development", "Business Design"],
+    category: ["creative-direction"],
+    role: ["Creative Direction", "Concept Development"],
     description:
       "都市伝説とシンセウェーブを組み合わせた実験型アイドルプロジェクト。",
     thumbnail: "/images/works/avaclub/cover.png",
