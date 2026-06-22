@@ -92,7 +92,6 @@ export const discography: DiscographyArtist[] = [
   },
   {
     name: "AVACLUB",
-    workSlug: "avaclub",
     image: "/images/works/avaclub/cover.png",
     groups: [
       {

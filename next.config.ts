@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       { source: "/about", destination: "/", permanent: true },
       // にしの愛望 moved from a WORKS project to the 楽曲提供 list.
       { source: "/works/nishino-aimi", destination: "/works", permanent: true },
+      // AVACLUB is a songwriting credit only (no longer a WORKS project).
+      { source: "/works/avaclub", destination: "/works", permanent: true },
     ];
   },
 };

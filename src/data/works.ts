@@ -99,17 +99,6 @@ export const works: Work[] = [
     thumbnail: "/images/works/retrorain/cover.jpg",
     featured: true,
   },
-  {
-    slug: "avaclub",
-    title: "AVACLUB",
-    year: "2024",
-    category: ["creative-direction"],
-    role: ["Creative Direction", "Concept Development"],
-    description:
-      "都市伝説とシンセウェーブを組み合わせた実験型アイドルプロジェクト。",
-    concept: "噂話は今日も僕らを踊らせる。",
-    thumbnail: "/images/works/avaclub/cover.png",
-  },
 ];
 
 /** Lookup a single work by slug. */
