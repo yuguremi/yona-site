@@ -107,6 +107,7 @@ export const works: Work[] = [
     role: ["Creative Direction", "Concept Development"],
     description:
       "都市伝説とシンセウェーブを組み合わせた実験型アイドルプロジェクト。",
+    concept: "噂話は今日も僕らを踊らせる。",
     thumbnail: "/images/works/avaclub/cover.png",
   },
 ];
