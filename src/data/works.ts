@@ -83,7 +83,7 @@ export const works: Work[] = [
       { label: "Music & Lyrics", value: "yona" },
       { label: "Creative Direction", value: "yona" },
     ],
-    thumbnail: "/images/works/yuguremi/cover.png",
+    thumbnail: "/images/works/yuguremi/cover.webp",
     featured: true,
   },
   {

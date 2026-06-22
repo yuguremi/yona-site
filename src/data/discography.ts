@@ -35,7 +35,7 @@ export const discography: DiscographyArtist[] = [
   {
     name: "YUGUREMI",
     workSlug: "yuguremi",
-    image: "/images/works/yuguremi/cover.png",
+    image: "/images/works/yuguremi/cover.webp",
     groups: [
       { role: "music-arr", songs: ["CROSS"] },
       {
