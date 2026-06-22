@@ -56,7 +56,6 @@ export default async function WorkDetailPage({
 
   // Only render narrative sections that have content (SPEC §4.3).
   const narrative = [
-    { label: "Overview", value: work.description },
     { label: "Concept", value: work.concept },
     { label: "Challenge", value: work.challenge },
     { label: "Approach", value: work.approach },
