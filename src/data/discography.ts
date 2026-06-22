@@ -262,3 +262,22 @@ export function artistSongCount(artist: DiscographyArtist): number {
 export function totalSongCount(): number {
   return discography.reduce((sum, artist) => sum + artistSongCount(artist), 0);
 }
+
+/**
+ * Artists highlighted in the HOME "楽曲提供" teaser (curated order, newest first).
+ * Edit this list to change which appear on the homepage.
+ */
+export const featuredSongwriting: string[] = [
+  "にしの愛望",
+  "メガメガミ",
+  "アンスリューム",
+  "BOY MEETS HARU",
+  "MAJIBANCH",
+  "われらがプワプワプーワプワ",
+];
+
+export function getFeaturedSongwritingArtists(): DiscographyArtist[] {
+  return featuredSongwriting
+    .map((name) => discography.find((artist) => artist.name === name))
+    .filter((artist): artist is DiscographyArtist => Boolean(artist));
+}
