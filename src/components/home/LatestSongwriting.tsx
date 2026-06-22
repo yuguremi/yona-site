@@ -23,7 +23,7 @@ export function LatestSongwriting() {
     <section className="border-t border-line py-24 md:py-32">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading eyebrow="Songwriting" title="楽曲提供" />
+          <SectionHeading eyebrow="Latest" title="最新の楽曲提供" />
           <CtaLink href="/works" variant="ghost">
             View All
           </CtaLink>
