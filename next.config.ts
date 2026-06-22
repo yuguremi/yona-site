@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
       { source: "/discography", destination: "/works", permanent: true },
       // ABOUT page was removed.
       { source: "/about", destination: "/", permanent: true },
+      // にしの愛望 moved from a WORKS project to the 楽曲提供 list.
+      { source: "/works/nishino-aimi", destination: "/works", permanent: true },
     ];
   },
 };
