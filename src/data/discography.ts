@@ -57,6 +57,7 @@ export const discography: DiscographyArtist[] = [
           "Still With You",
           "夜に惑う",
           "愛逢月",
+          "心臓はまだ鳴っている",
         ],
       },
     ],
