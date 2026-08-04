@@ -112,6 +112,7 @@ export const discography: DiscographyArtist[] = [
           "ロンリーハイドアンドシーカー",
           "夏と怪異",
           "遊び半分",
+          "SHADOW",
         ],
       },
     ],
