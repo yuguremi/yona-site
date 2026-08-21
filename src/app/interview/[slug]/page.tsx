@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/common/Container";
+import { ExternalLink } from "@/components/common/ExternalLink";
+import { VideoEmbed } from "@/components/interview/VideoEmbed";
 import { RevealText } from "@/components/common/RevealText";
 import { ContactCTA } from "@/components/home/ContactCTA";
 import { getInterviewBySlug, interviews } from "@/data/interviews";
@@ -122,6 +124,48 @@ export default async function InterviewArticlePage({
           </div>
         </Container>
       </section>
+
+      {/* Video & links */}
+      {item.videoUrl || (item.links && item.links.length > 0) ? (
+        <Container>
+          <div className="mx-auto max-w-[760px] border-t border-line pt-12 md:pt-16">
+            {item.videoUrl ? (
+              <VideoEmbed url={item.videoUrl} caption={item.videoCaption} />
+            ) : null}
+
+            {item.links && item.links.length > 0 ? (
+              <div className="mt-8">
+                <p className="eyebrow mb-4">Watch / Listen</p>
+                <ul className="flex flex-col divide-y divide-line border-y border-line">
+                  {item.links.map((link) => (
+                    <li key={link.url}>
+                      <ExternalLink
+                        href={link.url}
+                        className="group flex items-center justify-between gap-4 py-4 transition-colors hover:text-foreground"
+                      >
+                        <span className="flex flex-col gap-1">
+                          <span className="text-sm text-foreground/90">{link.label}</span>
+                          {link.note ? (
+                            <span className="font-mono text-[11px] tracking-[0.12em] text-muted">
+                              {link.note}
+                            </span>
+                          ) : null}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="text-muted transition-transform duration-300 group-hover:translate-x-1 group-hover:text-foreground"
+                        >
+                          ↗
+                        </span>
+                      </ExternalLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </Container>
+      ) : null}
 
       {/* Body */}
       <Container>

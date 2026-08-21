@@ -96,6 +96,7 @@ export const works: Work[] = [
     description:
       "雨、記憶、再生を軸にしたアーティストプロジェクト。TRACE SILVER × AOHARIUM TOKYOによる共同プロデュース。",
     concept: "色褪せても、雨だけは鮮やかだ。",
+    videoUrl: "https://youtu.be/LoUDG9Oik8E",
     thumbnail: "/images/works/retrorain/cover.jpg",
     featured: true,
   },

@@ -34,6 +34,12 @@ export type Interview = {
   image: string;
   /** Optional closing quote */
   lastWord?: string[];
+  /** YouTube URL embedded at the top of the article (live footage / MV) */
+  videoUrl?: string;
+  /** Caption for the embedded video */
+  videoCaption?: string;
+  /** Related links (streaming, official pages). Empty ones are hidden. */
+  links?: { label: string; url: string; note?: string }[];
   sections: InterviewSection[];
 };
 
@@ -49,6 +55,20 @@ export const interviews: Interview[] = [
     interviewee: "yona",
     kicker: "“速いビート”の上に、“置いていかれる人”の感情を置く。",
     image: "/images/works/retrorain/cover.jpg",
+    videoUrl: "https://www.youtube.com/watch?v=LoUDG9Oik8E",
+    videoCaption: "RETRORAIN「各駅停車ロマン」2026.05.28 新宿MARZ",
+    links: [
+      {
+        label: "Live at 新宿MARZ",
+        url: "https://youtu.be/LoUDG9Oik8E",
+        note: "2026.05.28 / YouTube",
+      },
+      {
+        label: "RETRORAIN on Spotify",
+        url: "https://open.spotify.com/artist/3T48jrPSNVvIZCLS0yhZnV",
+        note: "Streaming",
+      },
+    ],
     lastWord: ["好きに聴いてもらっていいです。", "夜に聴くのがオススメかな"],
     sections: [
       {
