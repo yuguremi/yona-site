@@ -1,126 +1,80 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/common/Container";
+import { Media } from "@/components/common/Media";
 import { RevealText } from "@/components/common/RevealText";
 import { ContactCTA } from "@/components/home/ContactCTA";
-import { interview } from "@/data/interview";
-import { createMetadata, siteConfig } from "@/lib/metadata";
+import { interviews } from "@/data/interviews";
+import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Interview",
   description:
-    "YUGUREMI プロデューサー・yona インタビュー。音楽、クリエイティブ、マーケティング、そして“人生の一部になる景色”について。",
+    "yona のインタビュー。YUGUREMI、RETRORAIN の制作背景、音楽、クリエイティブ、そして届けたい景色について。",
   path: "/interview",
 });
 
-export default function InterviewPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: interview.title,
-    description: interview.lead,
-    url: `${siteConfig.url}/interview`,
-    author: { "@type": "Person", name: "yona" },
-    about: "YUGUREMI",
-    inLanguage: "ja",
-  };
-
+export default function InterviewIndexPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <Container className="pt-32 md:pt-40">
+        <header className="max-w-3xl">
+          <span className="eyebrow">Interview</span>
+          <h1 className="text-page-title mt-6 font-display font-semibold">Interview</h1>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
+            楽曲やプロジェクトの制作背景、そのときに考えていたこと。
+            言葉として残しているインタビューの記録。
+          </p>
+        </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-32 md:pt-40">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <Image
-            src="/images/works/yuguremi/cover.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
-        </div>
+        <div className="mt-14 flex flex-col gap-5 md:mt-16 md:gap-6">
+          {interviews.map((item, index) => (
+            <RevealText key={item.slug}>
+              <Link
+                href={`/interview/${item.slug}`}
+                className="group grid gap-6 overflow-hidden rounded-sm border border-line md:grid-cols-[20rem_1fr]"
+              >
+                <div className="relative aspect-[16/10] md:aspect-auto md:h-full md:min-h-[15rem]">
+                  <Media
+                    src={item.image}
+                    alt={`${item.artist} のビジュアル`}
+                    title={item.artist}
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, 20rem"
+                    className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
 
-        <Container>
-          <div className="max-w-4xl pb-16 md:pb-24">
-            <span className="eyebrow">{interview.eyebrow}</span>
-            <h1 className="mt-6 font-display text-[clamp(2.2rem,6vw,5rem)] font-semibold leading-[1.15] tracking-tight">
-              {interview.title}
-            </h1>
-            <div className="mt-8 h-px w-full bg-line" />
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-foreground/85 md:text-lg">
-              {interview.lead}
-            </p>
-            <p className="mt-6 max-w-2xl text-sm leading-loose text-muted">
-              {interview.intro}
-            </p>
-            <p className="eyebrow mt-10">{interview.meta}</p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Body */}
-      <Container>
-        <div className="mx-auto max-w-[760px]">
-          {interview.sections.map((section) => (
-            <RevealText key={section.no}>
-              <section className="border-t border-line py-14 md:py-20">
-                <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-sm text-accent">{section.no}</span>
-                  <h2 className="font-display text-2xl font-medium tracking-tight md:text-4xl">
-                    {section.title}
+                <div className="flex flex-col justify-center p-6 pt-0 md:p-8 md:pl-0">
+                  <span className="eyebrow">{item.artist} / Interview</span>
+                  <h2 className="mt-3 font-display text-2xl font-medium leading-snug tracking-tight md:text-4xl">
+                    {item.title}
                   </h2>
+                  {item.subtitle ? (
+                    <p className="mt-2 text-sm text-accent md:text-base">{item.subtitle}</p>
+                  ) : null}
+                  <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted">
+                    {item.lead}
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/85">
+                    Read Interview
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </span>
                 </div>
-
-                <div className="mt-10 space-y-10">
-                  {section.qa.map((item) => (
-                    <div key={item.q}>
-                      <p className="flex gap-3 text-base font-medium leading-relaxed text-foreground">
-                        <span aria-hidden="true" className="shrink-0 text-muted">
-                          ——
-                        </span>
-                        <span>{item.q}</span>
-                      </p>
-                      <div className="mt-4 space-y-4 border-l border-line pl-5">
-                        {item.a.map((paragraph, index) => (
-                          <p
-                            key={index}
-                            className="text-base leading-loose text-foreground/85"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {section.pullquote ? (
-                  <blockquote className="mt-12 border-l-2 border-accent pl-6">
-                    <p className="font-display text-xl leading-relaxed tracking-tight text-foreground md:text-3xl">
-                      「{section.pullquote}」
-                    </p>
-                  </blockquote>
-                ) : null}
-              </section>
+              </Link>
             </RevealText>
           ))}
-
-          <div className="border-t border-line py-10">
-            <p className="eyebrow">End of interview</p>
-          </div>
         </div>
       </Container>
 
-      <ContactCTA
-        heading="制作・プロデュースのご相談"
-        ctaLabel="Start a Project"
-      />
+      <div className="mt-24 md:mt-32">
+        <ContactCTA />
+      </div>
     </>
   );
 }

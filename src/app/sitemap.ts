@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { works } from "@/data/works";
+import { interviews } from "@/data/interviews";
 import { siteConfig } from "@/lib/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,6 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteConfig.url}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
+  const interviewRoutes: MetadataRoute.Sitemap = interviews.map((item) => ({
+    url: `${siteConfig.url}/interview/${item.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   const workRoutes: MetadataRoute.Sitemap = works.map((work) => ({
     url: `${siteConfig.url}/works/${work.slug}`,
     lastModified: now,
@@ -21,5 +29,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...workRoutes];
+  return [...staticRoutes, ...interviewRoutes, ...workRoutes];
 }
