@@ -7,14 +7,14 @@ import { ExternalLink } from "@/components/common/ExternalLink";
 import { VideoEmbed } from "@/components/interview/VideoEmbed";
 import { RevealText } from "@/components/common/RevealText";
 import { ContactCTA } from "@/components/home/ContactCTA";
-import { getInterviewBySlug, interviews } from "@/data/interviews";
+import { getInterviewBySlug, visibleInterviews } from "@/data/interviews";
 import { createMetadata, siteConfig } from "@/lib/metadata";
 import { hasMedia } from "@/lib/utils";
 
 type Params = { slug: string };
 
 export function generateStaticParams(): Params[] {
-  return interviews.map((item) => ({ slug: item.slug }));
+  return visibleInterviews.map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({

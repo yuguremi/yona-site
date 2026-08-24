@@ -17,6 +17,8 @@ export type InterviewSection = {
 
 export type Interview = {
   slug: string;
+  /** Set true to hide from the site (kept in the codebase for later) */
+  hidden?: boolean;
   /** Artist / project this interview is about */
   artist: string;
   /** Main headline */
@@ -303,6 +305,7 @@ export const interviews: Interview[] = [
   },
   {
     slug: "yona-yuguremi",
+    hidden: true,
     artist: "YUGUREMI",
     title: "「何かが欲しいんじゃなくて、夢を見ている」",
     lead: "YUGUREMI プロデューサー・yona が語る、音楽、クリエイティブ、マーケティング、そして“人生の一部になる景色”。",
@@ -502,6 +505,9 @@ export const interviews: Interview[] = [
   },
 ];
 
+/** Interviews shown on the site (hidden ones are excluded). */
+export const visibleInterviews: Interview[] = interviews.filter((item) => !item.hidden);
+
 export function getInterviewBySlug(slug: string): Interview | undefined {
-  return interviews.find((item) => item.slug === slug);
+  return visibleInterviews.find((item) => item.slug === slug);
 }

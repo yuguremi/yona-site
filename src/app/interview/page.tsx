@@ -4,13 +4,13 @@ import { Container } from "@/components/common/Container";
 import { Media } from "@/components/common/Media";
 import { RevealText } from "@/components/common/RevealText";
 import { ContactCTA } from "@/components/home/ContactCTA";
-import { interviews } from "@/data/interviews";
+import { visibleInterviews } from "@/data/interviews";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Interview",
   description:
-    "yona のインタビュー。YUGUREMI、RETRORAIN の制作背景、音楽、クリエイティブ、そして届けたい景色について。",
+    "yona のインタビュー。楽曲やプロジェクトの制作背景、音楽、クリエイティブ、そして届けたい景色について。",
   path: "/interview",
 });
 
@@ -28,7 +28,7 @@ export default function InterviewIndexPage() {
         </header>
 
         <div className="mt-14 flex flex-col gap-5 md:mt-16 md:gap-6">
-          {interviews.map((item, index) => (
+          {visibleInterviews.map((item, index) => (
             <RevealText key={item.slug}>
               <Link
                 href={`/interview/${item.slug}`}
