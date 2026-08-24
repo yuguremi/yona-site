@@ -22,6 +22,12 @@ type CreateMetadataInput = {
   description?: string;
   path?: string;
   noIndex?: boolean;
+  /**
+   * Social share image. Defaults to the site-wide generated OG image.
+   * Pass `null` on routes that provide their own `opengraph-image` file,
+   * so the tag is not duplicated.
+   */
+  image?: string | null;
 };
 
 /**
@@ -34,10 +40,12 @@ export function createMetadata({
   description,
   path = "/",
   noIndex,
+  image,
 }: CreateMetadataInput = {}): Metadata {
   const url = `${siteConfig.url}${path}`;
   const resolvedTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
   const resolvedDescription = description ?? siteConfig.description;
+  const resolvedImage = image === null ? undefined : (image ?? `${siteConfig.url}/opengraph-image`);
 
   return {
     title: resolvedTitle,
@@ -50,11 +58,13 @@ export function createMetadata({
       title: resolvedTitle,
       description: resolvedDescription,
       locale: siteConfig.locale,
+      ...(resolvedImage ? { images: [{ url: resolvedImage, width: 1200, height: 630 }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: resolvedTitle,
       description: resolvedDescription,
+      ...(resolvedImage ? { images: [resolvedImage] } : {}),
     },
     ...(noIndex ? { robots: { index: false, follow: false } } : {}),
   };

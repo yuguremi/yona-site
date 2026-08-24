@@ -31,6 +31,7 @@ export async function generateMetadata({
     title: `${item.title} | Interview`,
     description: item.lead,
     path: `/interview/${item.slug}`,
+    image: null,
   });
 }
 

@@ -33,7 +33,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  ...createMetadata(),
+  ...createMetadata({ image: null }),
   applicationName: siteConfig.name,
   authors: [{ name: "yona" }],
   creator: "yona",
