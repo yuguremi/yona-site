@@ -15,6 +15,7 @@ import {
   works,
 } from "@/data/works";
 import { createMetadata, siteConfig } from "@/lib/metadata";
+import { artistAnchor, artistSongCount, discography } from "@/data/discography";
 
 type Params = { slug: string };
 
@@ -66,8 +67,9 @@ export default async function WorkDetailPage({
   const links = [
     { label: "Listen", href: work.musicUrl },
     { label: "Watch", href: work.videoUrl },
-    { label: "Visit", href: work.externalUrl },
+    { label: "Official Site", href: work.externalUrl },
   ].filter((link): link is { label: string; href: string } => Boolean(link.href));
+  const songwriting = discography.find((artist) => artist.workSlug === work.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -96,7 +98,7 @@ export default async function WorkDetailPage({
 
         <header className="mt-8 max-w-4xl">
           <span className="eyebrow">{categoryText}</span>
-          <h1 className="text-page-title mt-5 font-display font-semibold">
+          <h1 className="text-page-title mt-5 font-display">
             {work.title}
           </h1>
           {work.subtitle ? (
@@ -131,6 +133,10 @@ export default async function WorkDetailPage({
                 </p>
               </section>
             ))}
+
+            {work.milestones?.length ? <section><h2 className="eyebrow mb-5">Milestones</h2><ol className="border-t border-line">{work.milestones.map((milestone) => <li key={`${milestone.date}-${milestone.label}`} className="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-4"><time className="font-mono text-xs text-muted">{milestone.date}</time><div><p className="text-lg font-light md:text-xl">{milestone.label}</p>{milestone.detail ? <p className="mt-1 text-sm text-muted">{milestone.detail}</p> : null}</div></li>)}</ol></section> : null}
+
+            {songwriting ? <section><h2 className="eyebrow mb-4">Songwriting</h2><p className="text-base text-foreground/85">{songwriting.name} の楽曲 {artistSongCount(songwriting)} 曲を担当</p><Link href={`/works#${artistAnchor(songwriting)}`} className="mt-3 inline-block font-mono text-[11px] tracking-[0.16em] text-muted hover:text-foreground">クレジットを見る →</Link></section> : null}
 
             <WorkCredits credits={work.credits} />
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Noto_Sans_JP, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Noto_Sans_JP, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -8,10 +8,10 @@ import { PageTransition } from "@/components/common/PageTransition";
 import { createMetadata, siteConfig } from "@/lib/metadata";
 import { socialLinks } from "@/data/socialLinks";
 
-const spaceGrotesk = Space_Grotesk({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#090909",
+  themeColor: "#0B0B0C",
   colorScheme: "dark",
 };
 
@@ -85,7 +85,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${spaceGrotesk.variable} ${notoSansJP.variable} ${ibmPlexMono.variable}`}
+      className={`${archivo.variable} ${notoSansJP.variable} ${ibmPlexMono.variable}`}
     >
       <body className="font-sans antialiased">
         <script

@@ -1,91 +1,18 @@
 import Link from "next/link";
+import { ExternalLink } from "@/components/common/ExternalLink";
 import { Media } from "@/components/common/Media";
-import { categoryLabels, type Work } from "@/data/works";
-import { cn, hasMedia } from "@/lib/utils";
+import type { Work } from "@/data/works";
+import { cn } from "@/lib/utils";
 
-/**
- * Cinematic, image-forward project card for the WORKS page.
- * The title/category sit over the image with a gradient scrim, so it reads
- * boldly both with a real key visual and with the typographic placeholder.
- */
-export function ProjectCard({
-  work,
-  featured = false,
-  priority = false,
-}: {
-  work: Work;
-  featured?: boolean;
-  priority?: boolean;
-}) {
-  const categoryText = work.category.map((c) => categoryLabels[c]).join(" / ");
-  // When a real key visual is supplied (which already carries the group's
-  // logo), keep the title for a11y/SEO but hide it visually to avoid the name
-  // appearing twice.
-  const hasCover = hasMedia(work.thumbnail);
-
-  return (
-    <Link
-      href={`/works/${work.slug}`}
-      className="group relative block overflow-hidden rounded-sm border border-line"
-    >
-      <div className={cn(featured ? "aspect-[16/10] md:aspect-[16/7]" : "aspect-[4/3]")}>
-        <Media
-          src={work.thumbnail}
-          alt={`${work.title} のビジュアル`}
-          priority={priority}
-          sizes={
-            featured
-              ? "(max-width: 1440px) 100vw, 1440px"
-              : "(max-width: 768px) 100vw, 50vw"
-          }
-          className="transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
-        />
-      </div>
-
-      {/* Scrim for legibility */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/90"
-      />
-
-      {/* Year badge */}
-      <span className="absolute right-5 top-5 font-mono text-[11px] tracking-[0.18em] text-foreground/70 md:right-6 md:top-6">
-        {work.year}
-      </span>
-
-      {/* Overlaid title block */}
-      <div
-        className={cn(
-          "absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6 md:p-8",
-          featured && "md:p-10",
-        )}
-      >
-        <span className="eyebrow text-foreground/70">{categoryText}</span>
-        <h3
-          className={cn(
-            "font-display font-semibold tracking-tight",
-            hasCover
-              ? "sr-only"
-              : featured
-                ? "text-4xl md:text-6xl"
-                : "text-2xl md:text-4xl",
-          )}
-        >
-          {work.title}
-        </h3>
-        {work.subtitle && !hasCover ? (
-          <p className="text-sm text-foreground/70">{work.subtitle}</p>
-        ) : null}
-        <span className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/85">
-          View Project
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          >
-            →
-          </span>
-        </span>
-      </div>
+export function ProjectCard({ work, featured = false, priority = false }: { work: Work; featured?: boolean; priority?: boolean }) {
+  return <article>
+    <Link href={`/works/${work.slug}`} className="group block">
+      <div className={cn("overflow-hidden", featured ? "aspect-[16/9] md:aspect-[21/9]" : "aspect-[3/2]")}><Media src={work.thumbnail} alt={`${work.title} のビジュアル`} priority={priority} sizes={featured ? "(max-width: 1440px) 100vw, 1440px" : "(max-width: 768px) 100vw, 50vw"} className="transition-transform duration-700 group-hover:scale-[1.03]" /></div>
+      <div className="mt-6 flex items-baseline justify-between gap-5"><h3 className="font-display text-4xl font-light tracking-tight md:text-6xl">{work.title}</h3><span className="font-mono text-xs text-muted">{work.year}</span></div>
+      <p className="eyebrow mt-3">{work.role.slice(0, 3).join(" / ")}</p>
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">{work.description}</p>
+      <span className="mt-5 inline-block font-mono text-[11px] uppercase tracking-[0.18em]">View Project →</span>
     </Link>
-  );
+    {work.externalUrl ? <ExternalLink href={work.externalUrl} className="mt-4 inline-block font-mono text-[11px] tracking-[0.18em] text-muted hover:text-foreground">公式サイト ↗</ExternalLink> : null}
+  </article>;
 }

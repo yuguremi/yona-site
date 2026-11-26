@@ -29,5 +29,6 @@ export const activityDomains = [
 
 export const traceSilver = {
   heading: "TRACE SILVER",
+  url: "https://trace-silver-web.vercel.app",
   body: "yonaが主宰するクリエイティブ／アーティストプロデュースの拠点。音楽、ビジュアル、ライブ、物販、発信を一つの物語として統合し、アーティスト固有の世界観を設計・運営しています。",
 };

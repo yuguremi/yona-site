@@ -1,6 +1,5 @@
 /**
  * Central registry for all external / social links (SPEC §5.2).
- * Replace the placeholder `href` values with the real account URLs.
  * Links whose href is empty ("") are automatically hidden in the UI.
  */
 export type SocialLink = {
@@ -12,6 +11,6 @@ export type SocialLink = {
   handle?: string;
 };
 
-// No social links for now. Add entries here (label + real href) and they will
-// automatically reappear in the footer and mobile menu.
-export const socialLinks: SocialLink[] = [];
+export const socialLinks: SocialLink[] = [
+  { label: "X", href: "https://x.com/yona_framyn", handle: "@yona_framyn" },
+];

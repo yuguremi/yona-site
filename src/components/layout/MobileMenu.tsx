@@ -120,7 +120,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 <Link
                   href={item.href}
                   onClick={onClose}
-                  className="font-display text-4xl font-medium tracking-tight text-foreground transition-colors hover:text-muted"
+                  className="font-display text-4xl font-light tracking-tight text-foreground transition-colors hover:text-muted"
                 >
                   {item.label}
                 </Link>
@@ -129,19 +129,18 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </ul>
         </nav>
 
-        {socialLinks.length > 0 ? (
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
             {socialLinks.map((link) => (
               <ExternalLink
                 key={link.label}
                 href={link.href}
                 className="font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground"
               >
-                {link.label}
+                {link.handle ?? link.label} ↗
               </ExternalLink>
             ))}
-          </div>
-        ) : null}
+          <ExternalLink href="https://trace-silver-web.vercel.app" className="font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground">TRACE SILVER ↗</ExternalLink>
+        </div>
       </div>
     </div>
   );

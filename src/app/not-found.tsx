@@ -8,7 +8,7 @@ import { CtaLink } from "@/components/common/CtaLink";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[100svh] flex-col items-center justify-center text-center">
-      <span className="font-display text-[clamp(5rem,22vw,16rem)] font-semibold leading-none">
+      <span className="font-display text-[clamp(5rem,22vw,16rem)] font-light leading-none">
         404
       </span>
       <p className="eyebrow mt-4">This memory does not exist.</p>

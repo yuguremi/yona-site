@@ -19,10 +19,10 @@ export function ContactCTA({
   ctaHref = "/contact",
 }: ContactCTAProps) {
   return (
-    <section className="border-t border-line py-24 md:py-32">
+    <section className="border-t border-line py-24 md:py-36">
       <Container>
         <RevealText className="flex flex-col items-start gap-8">
-          <h2 className="text-section-title max-w-2xl font-display font-medium">
+          <h2 className="text-section-title max-w-3xl font-display">
             {heading}
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted">{body}</p>

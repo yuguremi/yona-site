@@ -23,13 +23,22 @@ export const creditRoleLabelsJa: Record<CreditRole, string> = {
   bgm: "BGM制作",
 };
 
-export type DiscographyGroup = { role: CreditRole; songs: string[] };
+/**
+ * A song title, or a title with its release date (YYYY-MM-DD). Dated songs
+ * appear in the newest-first credit roll on HOME, so give new releases a
+ * date when adding them.
+ */
+export type SongEntry = string | { title: string; released: string };
+
+export type DiscographyGroup = { role: CreditRole; songs: SongEntry[] };
 export type DiscographyArtist = {
   name: string;
   /** Optional link to a /works/<slug> detail page */
   workSlug?: string;
   /** Artist key visual path; falls back to a placeholder when omitted */
   image?: string;
+  /** The artist's official website (shown as an external link) */
+  site?: string;
   groups: DiscographyGroup[];
 };
 
@@ -38,22 +47,26 @@ export const discography: DiscographyArtist[] = [
     name: "YUGUREMI",
     workSlug: "yuguremi",
     image: "/images/works/yuguremi/cover.webp",
+    site: "https://yuguremi-web.vercel.app",
     groups: [
       { role: "music-arr", songs: ["CROSS"] },
       {
         role: "lyrics-music-arr",
         songs: [
-          "終夜アングラリア",
-          "ガラスの夜に",
-          "未送信二文字",
-          "ヘイセイパーリナイ",
-          "デデデDeath",
-          "ヒューマノイズ",
-          "Re:sonance",
-          "全身全霊",
-          "Just Panic Just Party",
-          "夜想",
-          "えんや心中",
+          { title: "君を忘れるパスワード", released: "2026-11-30" },
+          { title: "見えない流星", released: "2026-11-30" },
+          { title: "忘却に栞を", released: "2026-11-30" },
+          { title: "終夜アングラリア", released: "2025-09-05" },
+          { title: "ガラスの夜に", released: "2025-09-05" },
+          { title: "未送信二文字", released: "2025-09-14" },
+          { title: "ヘイセイパーリナイ", released: "2025-09-05" },
+          { title: "デデデDeath", released: "2025-10-10" },
+          { title: "ヒューマノイズ", released: "2025-12-06" },
+          { title: "Re:sonance", released: "2025-12-18" },
+          { title: "全身全霊", released: "2026-01-16" },
+          { title: "Just Panic Just Party", released: "2026-02-06" },
+          { title: "夜想", released: "2026-04-19" },
+          { title: "えんや心中", released: "2026-05-15" },
           "Still With You",
           "夜に惑う",
           "愛逢月",
@@ -66,6 +79,7 @@ export const discography: DiscographyArtist[] = [
     name: "RETRORAIN",
     workSlug: "retrorain",
     image: "/images/works/retrorain/cover.jpg",
+    site: "https://retrorain-web.vercel.app",
     groups: [
       { role: "music-arr", songs: ["ノボリビ"] },
       {
@@ -86,7 +100,7 @@ export const discography: DiscographyArtist[] = [
           "痛みを忘れた街で",
           "エスパーじゃないけど",
           "Rewrite the Rain",
-          "各駅停車ロマン",
+          { title: "各駅停車ロマン", released: "2026-09-11" },
         ],
       },
     ],
@@ -94,25 +108,26 @@ export const discography: DiscographyArtist[] = [
   {
     name: "AVACLUB",
     image: "/images/works/avaclub/cover.png",
+    site: "https://avaclub-web.vercel.app",
     groups: [
       {
         role: "music-arr",
         songs: [
-          "コックリーク",
-          "イルミナティ",
-          "Hello?",
-          "MASHIRO",
-          "MORE",
-          "Slender",
+          { title: "コックリーク", released: "2025-01-09" },
+          { title: "イルミナティ", released: "2025-01-09" },
+          { title: "Hello?", released: "2025-12-26" },
+          { title: "MASHIRO", released: "2025-11-28" },
+          { title: "MORE", released: "2025-01-16" },
+          { title: "Slender", released: "2025-01-16" },
           "Spam!",
           "UMA's Dance",
-          "VLaD",
+          { title: "VLaD", released: "2025-10-24" },
           "WW",
           "Delgado",
           "ロンリーハイドアンドシーカー",
           "夏と怪異",
           "遊び半分",
-          "SHADOW",
+          { title: "SHADOW", released: "2026-08-18" },
         ],
       },
     ],
@@ -256,6 +271,26 @@ export const discography: DiscographyArtist[] = [
   },
 ];
 
+/** The newest release, shown next to the credit roll on HOME. */
+export const latestRelease = {
+  title: "忘却の観測記録",
+  artist: "YUGUREMI",
+  format: "CD",
+  released: "2026-11-30",
+  cover: "/images/releases/boukyaku-no-kansoku-kiroku.jpg",
+  tracks: ["君を忘れるパスワード", "見えない流星", "忘却に栞を"],
+  credit: "作詞・作曲・編曲",
+  href: "/works/yuguremi",
+};
+
+export function songTitle(entry: SongEntry): string {
+  return typeof entry === "string" ? entry : entry.title;
+}
+
+export function songReleased(entry: SongEntry): string | undefined {
+  return typeof entry === "string" ? undefined : entry.released;
+}
+
 export function artistSongCount(artist: DiscographyArtist): number {
   return artist.groups.reduce((sum, group) => sum + group.songs.length, 0);
 }
@@ -264,21 +299,40 @@ export function totalSongCount(): number {
   return discography.reduce((sum, artist) => sum + artistSongCount(artist), 0);
 }
 
-/**
- * Artists highlighted in the HOME "楽曲提供" teaser (curated order, newest first).
- * Edit this list to change which appear on the homepage.
- */
-export const featuredSongwriting: string[] = [
-  "にしの愛望",
-  "メガメガミ",
-  "アンスリューム",
-  "BOY MEETS HARU",
-  "MAJIBANCH",
-  "われらがプワプワプーワプワ",
-];
+/** URL-safe anchor id for an artist block on the WORKS page (#credits-…). */
+export function artistAnchor(artist: DiscographyArtist): string {
+  const index = discography.indexOf(artist);
+  const ascii = artist.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return `credits-${ascii || `artist-${index + 1}`}`;
+}
 
-export function getFeaturedSongwritingArtists(): DiscographyArtist[] {
-  return featuredSongwriting
-    .map((name) => discography.find((artist) => artist.name === name))
-    .filter((artist): artist is DiscographyArtist => Boolean(artist));
+export type CreditRollItem = {
+  title: string;
+  artist: string;
+  role: CreditRole;
+  /** YYYY-MM-DD */
+  released: string;
+};
+
+/**
+ * Dated songs across all artists, newest first (same-day songs keep the
+ * order written above). Feeds the credit roll on HOME.
+ */
+export function getRecentCredits(limit = 16): CreditRollItem[] {
+  const items: CreditRollItem[] = [];
+  for (const artist of discography) {
+    for (const group of artist.groups) {
+      for (const entry of group.songs) {
+        const released = songReleased(entry);
+        if (released) {
+          items.push({ title: songTitle(entry), artist: artist.name, role: group.role, released });
+        }
+      }
+    }
+  }
+  // Array.prototype.sort is stable, so same-day songs keep their written order.
+  return items.sort((a, b) => b.released.localeCompare(a.released)).slice(0, limit);
 }

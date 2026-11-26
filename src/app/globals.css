@@ -4,15 +4,16 @@
 /* Design tokens (SPEC §6.2 / §6.3)                                    */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: #090909;
-  --surface: #111111;
-  --foreground: #f1eee8;
-  --muted: #8a8a8a;
-  --line: rgba(255, 255, 255, 0.14);
-  /* Palette derived from the profile artwork (teal figure on crimson) */
-  --accent: #2bb6a4; /* teal — primary accent, used sparingly */
-  --accent-warm: #e23a52; /* crimson — secondary / decorative accent */
-  --danger: #d23a4f;
+  --background: #0b0b0c;
+  --surface: #141416;
+  --foreground: #ece9e4;
+  --muted: #8f8b85;
+  --line: rgba(236, 233, 228, 0.12);
+  --line-strong: rgba(236, 233, 228, 0.88);
+  --accent: #e2344f;
+  --accent-cool: #2bb6a4;
+  --accent-warm: var(--accent);
+  --danger: #e2344f;
 }
 
 @theme inline {
@@ -21,12 +22,14 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
+  --color-accent-cool: var(--accent-cool);
   --color-accent-warm: var(--accent-warm);
   --color-danger: var(--danger);
 
   /* Fonts are injected as CSS variables by next/font in layout.tsx */
-  --font-display: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
   --font-sans: var(--font-noto-sans-jp), system-ui, "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono: var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", monospace;
 }
@@ -81,21 +84,34 @@ body {
 /* Typography helpers (SPEC §6.3)                                      */
 /* ------------------------------------------------------------------ */
 @utility text-hero {
-  font-size: clamp(4rem, 12vw, 11rem);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: clamp(6.5rem, 21vw, 19rem);
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+  font-weight: 250;
+  font-stretch: 96%;
 }
 
 @utility text-page-title {
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-size: clamp(3.25rem, 9vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  font-weight: 300;
 }
 
 @utility text-section-title {
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 300;
+}
+
+@utility num {
+  font-family: var(--font-display);
+  font-stretch: 62%;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
 }
 
 @utility eyebrow {
@@ -114,15 +130,31 @@ body {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 640px) {
   /* Simplify on mobile for performance (SPEC §6.6) */
   .noise-overlay {
-    opacity: 0.035;
+    opacity: 0.025;
   }
+}
+
+@keyframes credit-roll {
+  to { transform: translateY(-50%); }
+}
+
+.credit-roll-track {
+  animation: credit-roll 54s linear infinite;
+}
+
+.credit-roll-viewport:hover .credit-roll-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credit-roll-copy { display: none; }
 }
 
 /* Reusable placeholder grain (lighter, for media placeholders) */

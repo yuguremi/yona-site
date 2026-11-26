@@ -16,7 +16,7 @@ export default function ContactPage() {
       <div className="grid gap-12 md:grid-cols-[22rem_1fr] md:gap-16">
         <header className="md:sticky md:top-28 md:self-start">
           <span className="eyebrow">Contact</span>
-          <h1 className="text-page-title mt-6 font-display font-semibold">Contact</h1>
+          <h1 className="text-page-title mt-6 font-display">Contact</h1>
           <p className="mt-6 max-w-sm text-base leading-relaxed text-muted">
             制作・プロデュースのご相談、出演・取材のご依頼など、
             お気軽にお問い合わせください。内容を確認のうえ折り返しご連絡します。

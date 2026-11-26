@@ -5,7 +5,7 @@ import { ContactCTA } from "@/components/home/ContactCTA";
 import { DiscographyList } from "@/components/works/DiscographyList";
 import { ProjectCard } from "@/components/works/ProjectCard";
 import { getSortedWorks } from "@/data/works";
-import { discography, totalSongCount } from "@/data/discography";
+import { artistAnchor, discography, totalSongCount } from "@/data/discography";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
@@ -24,7 +24,7 @@ export default function WorksPage() {
       <Container className="pt-32 md:pt-40">
         <header className="max-w-3xl">
           <span className="eyebrow">Portfolio</span>
-          <h1 className="text-page-title mt-6 font-display font-semibold">Works</h1>
+          <h1 className="text-page-title mt-6 font-display">Works</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
             領域を横断して設計したアーティストプロデュースのプロジェクトと、
             作詞・作曲・編曲による楽曲提供の記録。
@@ -34,10 +34,12 @@ export default function WorksPage() {
         {/* Projects — cinematic featured layout */}
         <section className="mt-12 md:mt-16">
           <h2 className="eyebrow mb-6">Projects</h2>
-          <div className="flex flex-col gap-5 md:gap-6">
+          <div className="flex flex-col gap-16 md:gap-24">
             {featured ? <ProjectCard work={featured} featured priority /> : null}
-            {rest.length > 0 ? (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
+            {/* A lone remaining project gets the full width instead of half a row. */}
+            {rest.length === 1 ? <ProjectCard work={rest[0]} featured /> : null}
+            {rest.length > 1 ? (
+              <div className="grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-2">
                 {rest.map((work, index) => (
                   <ProjectCard key={work.slug} work={work} priority={index === 0} />
                 ))}
@@ -48,17 +50,16 @@ export default function WorksPage() {
       </Container>
 
       {/* Songwriting credits */}
-      <Container className="mt-24 md:mt-32">
+      <section id="credits" className="mt-24 scroll-mt-28 md:mt-32"><Container>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="Songwriting" title="楽曲提供" />
-          <span className="font-mono text-xs text-muted">
-            {discography.length} artists / {totalSongCount()} songs
-          </span>
+          <div className="flex gap-8"><span><b className="num text-4xl font-normal">{discography.length}</b><small className="ml-2 font-mono text-[10px] tracking-[0.16em] text-muted">ARTISTS</small></span><span><b className="num text-4xl font-normal">{totalSongCount()}</b><small className="ml-2 font-mono text-[10px] tracking-[0.16em] text-muted">SONGS</small></span></div>
         </div>
+        <nav aria-label="アーティスト" className="mt-10 flex flex-wrap gap-x-3 gap-y-2">{discography.map((artist, index) => <span key={artist.name} className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted"><a href={`#${artistAnchor(artist)}`} className="hover:text-foreground">{artist.name}</a>{index < discography.length - 1 ? <span className="ml-3">／</span> : null}</span>)}</nav>
         <div className="mt-10 md:mt-12">
           <DiscographyList />
         </div>
-      </Container>
+      </Container></section>
 
       <div className="mt-24 md:mt-32">
         <ContactCTA />

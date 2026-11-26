@@ -10,11 +10,12 @@ export function WorkGallery({ images, title }: { images?: string[]; title: strin
   return (
     <section>
       <h2 className="eyebrow mb-6">Gallery</h2>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {/* Square tiles: gallery images are mostly jackets, which must not be cropped. */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {images.map((src, index) => (
           <div
             key={src}
-            className="relative aspect-[3/2] overflow-hidden rounded-sm border border-line"
+            className="relative aspect-square overflow-hidden rounded-[2px] border border-line"
           >
             <Media
               src={src}

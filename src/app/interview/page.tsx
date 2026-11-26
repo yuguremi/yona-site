@@ -20,7 +20,7 @@ export default function InterviewIndexPage() {
       <Container className="pt-32 md:pt-40">
         <header className="max-w-3xl">
           <span className="eyebrow">Interview</span>
-          <h1 className="text-page-title mt-6 font-display font-semibold">Interview</h1>
+          <h1 className="text-page-title mt-6 font-display">Interview</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
             楽曲やプロジェクトの制作背景、そのときに考えていたこと。
             言葉として残しているインタビューの記録。

@@ -7,6 +7,7 @@ import { Container } from "@/components/common/Container";
 import { MobileMenu } from "./MobileMenu";
 import { navItems } from "./nav";
 import { cn } from "@/lib/utils";
+import { socialLinks } from "@/data/socialLinks";
 
 /**
  * Sticky site header (SPEC §5.1):
@@ -28,13 +29,13 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-[70] transition-colors duration-300",
-        scrolled ? "border-b border-line bg-background/70 backdrop-blur-md" : "bg-transparent",
+        scrolled ? "border-b border-line bg-background/80 backdrop-blur-md" : "bg-transparent",
       )}
     >
       <Container className="flex h-16 items-center justify-between md:h-20">
         <Link
           href="/"
-          className="font-display text-xl font-semibold tracking-tight text-foreground"
+          className="font-display text-xl font-medium tracking-tight text-foreground"
         >
           yona
         </Link>
@@ -43,7 +44,8 @@ export function Header() {
         <nav className="hidden md:block" aria-label="メインナビゲーション">
           <ul className="flex items-center gap-8">
             {navItems.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+              const baseHref = item.href.split("#")[0];
+              const active = item.label !== "CREDITS" && (pathname === baseHref || pathname.startsWith(`${baseHref}/`));
               return (
                 <li key={item.href}>
                   <Link
@@ -51,7 +53,7 @@ export function Header() {
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "font-mono text-xs uppercase tracking-[0.18em] transition-colors hover:text-foreground",
-                      active ? "text-foreground" : "text-muted",
+                      active ? "text-foreground underline decoration-1 underline-offset-[6px]" : "text-muted",
                     )}
                   >
                     {item.label}
@@ -59,6 +61,7 @@ export function Header() {
                 </li>
               );
             })}
+            <li><a href={socialLinks[0].href} target="_blank" rel="noopener noreferrer" aria-label="X（@yona_framyn）を新しいタブで開く" className="font-mono text-xs uppercase tracking-[0.18em] text-muted transition-colors hover:text-foreground">X ↗</a></li>
           </ul>
         </nav>
 

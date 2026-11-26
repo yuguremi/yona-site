@@ -27,7 +27,7 @@ export function SectionHeading({
       {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
       <Tag
         className={cn(
-          "font-display font-medium",
+          "font-display",
           size === "page" ? "text-page-title" : "text-section-title",
         )}
       >

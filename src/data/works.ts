@@ -38,7 +38,10 @@ export type Work = {
   images?: string[];
   videoUrl?: string;
   musicUrl?: string;
+  /** The project's official website */
   externalUrl?: string;
+  /** Dated highlights, newest first (releases, one-man lives …) */
+  milestones?: { date: string; label: string; detail?: string }[];
   featured?: boolean;
 };
 
@@ -84,6 +87,25 @@ export const works: Work[] = [
       { label: "Creative Direction", value: "yona" },
     ],
     thumbnail: "/images/works/yuguremi/cover.webp",
+    images: ["/images/releases/boukyaku-no-kansoku-kiroku.jpg"],
+    externalUrl: "https://yuguremi-web.vercel.app",
+    milestones: [
+      {
+        date: "2026.11.30",
+        label: "CD「忘却の観測記録」",
+        detail: "君を忘れるパスワード／見えない流星／忘却に栞を",
+      },
+      {
+        date: "2026.11.16",
+        label: "2nd ONE-MAN LIVE「NIGHT PROTOCOL」",
+        detail: "赤羽 ReNY alpha",
+      },
+      {
+        date: "2025.09.05",
+        label: "1st Single「Twilight Triad」",
+        detail: "ガラスの夜に／ヘイセイパーリナイ／終夜アングラリア",
+      },
+    ],
     featured: true,
   },
   {
@@ -97,6 +119,7 @@ export const works: Work[] = [
       "雨、記憶、再生を軸にしたアーティストプロジェクト。TRACE SILVER × AOHARIUM TOKYOによる共同プロデュース。",
     concept: "色褪せても、雨だけは鮮やかだ。",
     videoUrl: "https://youtu.be/LoUDG9Oik8E",
+    externalUrl: "https://retrorain-web.vercel.app",
     thumbnail: "/images/works/retrorain/cover.jpg",
     featured: true,
   },

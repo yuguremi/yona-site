@@ -18,7 +18,7 @@ export default function ServicesPage() {
       <Container className="pt-32 md:pt-40">
         <header className="max-w-3xl">
           <span className="eyebrow">Services</span>
-          <h1 className="text-page-title mt-6 font-display font-semibold">Services</h1>
+          <h1 className="text-page-title mt-6 font-display">Services</h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
             楽曲単体ではなく、アーティストに関わる体験全体を設計します。
             4つの領域を、単独でもプロジェクトとしても承ります。
@@ -26,12 +26,11 @@ export default function ServicesPage() {
         </header>
 
         <div className="mt-16 flex flex-col">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <RevealText key={service.id}>
               <section className="grid gap-6 border-t border-line py-12 md:grid-cols-[20rem_1fr] md:gap-12 md:py-16">
                 <div>
-                  <span className="font-mono text-xs text-muted">0{index + 1}</span>
-                  <h2 className="mt-3 font-display text-2xl font-medium tracking-tight md:text-4xl">
+                  <h2 className="font-display text-2xl font-light tracking-tight md:text-4xl">
                     {service.title}
                   </h2>
                 </div>

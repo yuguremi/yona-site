@@ -1,112 +1,48 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import Link from "next/link";
 import { Container } from "@/components/common/Container";
 import { CtaLink } from "@/components/common/CtaLink";
+import { CreditRoll } from "./CreditRoll";
+import { discography, totalSongCount } from "@/data/discography";
+import { works } from "@/data/works";
+import { siteConfig } from "@/lib/metadata";
 
-const disciplines = [
-  "Music Production",
-  "Artist Produce",
-  "Creative Direction",
-  "Live & Story Design",
+const stats = [
+  { value: totalSongCount(), label: "SONGS", accent: true },
+  { value: discography.length, label: "ARTISTS" },
+  { value: works.length, label: "PRODUCED GROUPS" },
 ];
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-};
-
-/**
- * HOME hero (SPEC §4.1). Black background, faint glow, restrained REC /
- * timecode marks, and a one-time staggered text reveal that respects
- * prefers-reduced-motion and never blocks scrolling.
- */
 export function Hero() {
-  const reduceMotion = useReducedMotion();
-  const initial = reduceMotion ? "show" : "hidden";
-
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
-      {/* Background — generated atmospheric key art + dark scrim for legibility */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
-        <Image
-          src="/images/hero/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/15 to-transparent" />
-      </div>
+    <section className="pb-16 pt-28 md:pb-20 md:pt-32 lg:pb-12 lg:pt-28">
+      <Container className="grid items-stretch gap-16 lg:min-h-[calc(100svh-10rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16">
+        <div className="flex min-w-0 flex-col lg:justify-between">
+          <div>
+            <p className="eyebrow">MUSIC PRODUCER — COMPOSER — CREATIVE DIRECTOR</p>
+            <h1 className="text-hero -ml-[0.06em] mt-8 font-display">yona</h1>
+            <p className="mt-10 text-xl font-medium tracking-[0.08em] md:mt-14 md:text-2xl">
+              {siteConfig.tagline}
+            </p>
+          </div>
 
-      {/* Recording marks */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <span className="absolute right-5 top-20 font-mono text-[10px] tracking-[0.3em] text-muted md:right-10 md:top-24">
-          <span className="text-[var(--accent-warm)]">●</span> REC
-        </span>
-        <span className="absolute bottom-8 left-5 font-mono text-[10px] tracking-[0.3em] text-muted md:left-10">
-          00:00:00:01
-        </span>
-        <span className="absolute bottom-8 right-5 font-mono text-[10px] tracking-[0.3em] text-muted md:right-10">
-          DIGITAL ARCHIVE
-        </span>
-      </div>
-
-      <Container>
-        <motion.div variants={container} initial={initial} animate="show" className="max-w-4xl">
-          <motion.p variants={item} className="eyebrow">
-            Digital Archive of Emotions
-          </motion.p>
-
-          <motion.h1
-            variants={item}
-            className="text-hero mt-6 font-display font-semibold"
-          >
-            yona
-          </motion.h1>
-
-          <motion.p
-            variants={item}
-            className="mt-6 font-mono text-sm uppercase tracking-[0.28em] text-foreground/80 sm:text-base"
-          >
-            Music Producer
-            <br />
-            Creative Director
-          </motion.p>
-
-          <motion.p
-            variants={item}
-            className="mt-8 max-w-xl text-xl leading-relaxed text-foreground sm:text-2xl"
-          >
-            感情を、音楽と物語に変える。
-          </motion.p>
-
-          <motion.ul
-            variants={item}
-            className="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs uppercase tracking-[0.16em] text-muted"
-          >
-            {disciplines.map((discipline) => (
-              <li key={discipline}>{discipline}</li>
-            ))}
-          </motion.ul>
-
-          <motion.div variants={item} className="mt-12 flex flex-wrap gap-4">
-            <CtaLink href="/works" variant="solid">
-              View Works
-            </CtaLink>
-            <CtaLink href="/contact" variant="outline">
-              Contact
-            </CtaLink>
-          </motion.div>
-        </motion.div>
+          <div>
+            <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-6 border-t border-line pt-6">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse">
+                  <dt className="mt-2 font-mono text-[10px] tracking-[0.22em] text-muted">{stat.label}</dt>
+                  <dd className={`num text-6xl md:text-7xl ${stat.accent ? "text-accent" : ""}`}>{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-10 flex flex-wrap items-center gap-5">
+              <Image src="/images/profile/yona.jpg" alt="yona のプロフィールアート" width={48} height={48} className="size-12 rounded-[2px] object-cover" />
+              <CtaLink href="/contact">Start a Project</CtaLink>
+              <Link href="/works#credits" className="font-mono text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:text-muted">All Credits →</Link>
+            </div>
+          </div>
+        </div>
+        <CreditRoll />
       </Container>
     </section>
   );

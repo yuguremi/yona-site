@@ -52,7 +52,7 @@ export default function PrivacyPage() {
     <Container className="pt-32 pb-12 md:pt-40">
       <header className="max-w-3xl">
         <span className="eyebrow">Legal</span>
-        <h1 className="text-page-title mt-6 font-display font-semibold">Privacy</h1>
+        <h1 className="text-page-title mt-6 font-display">Privacy</h1>
         <p className="mt-6 text-sm text-muted">
           {siteConfig.name} 公式サイト（以下「本サイト」）における個人情報の取り扱いについて、以下のとおり定めます。
         </p>
